@@ -1,13 +1,17 @@
 import time
-from pages.base_page import BasePage
+from pages.elements_page import TextBoxPage
 
 
-def test(driver):
-    page = BasePage(driver, 'https://www.google.com/')
-    page.open()
-    time.sleep(3)
-
-
-# def test_open(driver):
-#     driver.get("https://www.google.com/")
-#     time.sleep(5)
+class TestElements:
+    class TestTextBox:
+        def test_text_box(self, driver):
+            page = TextBoxPage(driver, 'https://demoqa.com/text-box')
+            page.open()
+            page.fill_all_fields()
+            output_name, output_email, output_cur_address, output_per_address = page.check_filled_form()
+            # print(page.check_filled_form())
+            print(output_name)
+            print(output_email)
+            print(output_cur_address)
+            print(output_per_address)
+            time.sleep(3)
