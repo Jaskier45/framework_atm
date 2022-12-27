@@ -2,7 +2,7 @@ import random
 import time
 
 from generator.generator import generated_person
-from locators.elements_page_locators import TextBoxLocators, CheckBoxPageLocators
+from locators.elements_page_locators import TextBoxLocators, CheckBoxPageLocators, RadioButtonLocators
 from pages.base_page import BasePage
 
 
@@ -65,3 +65,18 @@ class CheckBoxPage(BasePage):
 
 # data1 = str(data1).replace(' ', '').replace('doc', '').replace('.','').lower()
 # data2 = str(data1).replace(' ', '').replace('doc', '').replace('.','').lower()
+
+
+class RadioButtonPage(BasePage):
+    locators = RadioButtonLocators
+
+    def click_on_the_radio_button(self, choice):
+        choices = {
+            'yes': self.locators.YES,
+            'impressive': self.locators.Impressive,
+            'no': self.locators.NO
+        }
+        self.element_is_visible(choices[choice]).click()
+
+    def get_output_results(self):
+        return self.element_is_present(self.locators.OUTPUT_RESULT).text
