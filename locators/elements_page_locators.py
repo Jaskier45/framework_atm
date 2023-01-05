@@ -30,3 +30,17 @@ class RadioButtonLocators:
     NO = (By.CSS_SELECTOR, "label[class^='custom-control-label'][for='noRadio']")
     OUTPUT_RESULT = (By.CSS_SELECTOR, "p span[class='text-success']")
 
+
+class WebTablePageLocators:
+    #add person
+    ADD_BUTTON = (By.CSS_SELECTOR, "button[id='addNewRecordButton']")
+    FIRSTNAME = (By.CSS_SELECTOR, "input[id='firstName']")
+    LASTNAME = (By.CSS_SELECTOR, "input[id='lastName']")
+    EMAIL = (By.CSS_SELECTOR, "input[id='userEmail']")
+    AGE = (By.CSS_SELECTOR, "input[id='age']")
+    SALARY = (By.CSS_SELECTOR, "input[id='salary']")
+    DEPARTMENT = (By.CSS_SELECTOR, "input[id='department']")
+    SUBMIT = (By.CSS_SELECTOR, "button[id='submit']")
+
+    #tables
+    FULL_PEOPLE_LIST = (By.CSS_SELECTOR, "div[class='rt-tr-group']")
