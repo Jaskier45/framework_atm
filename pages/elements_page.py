@@ -10,7 +10,7 @@ from pages.base_page import BasePage
 class TextBoxPage(BasePage):
     locators = TextBoxLocators()
 
-    def fill_all_fields(self,):
+    def fill_all_fields(self, ):
         person_info = next(generated_person())
         full_name = person_info.full_name
         email = person_info.email
@@ -55,14 +55,15 @@ class CheckBoxPage(BasePage):
         for box in checked_list:
             title_item = box.find_element("xpath", self.locators.TITLE_ITEM)
             data.append(title_item.text)
-        return str(data).replace(' ', '').replace('doc', '').replace('.','').lower()
+        return str(data).replace(' ', '').replace('doc', '').replace('.', '').lower()
 
     def get_output_result(self):
         result_list = self.elements_are_present(self.locators.OUTPUT_RESULT)
         data = []
         for item in result_list:
             data.append(item.text)
-        return str(data).replace(' ', '').replace('doc', '').replace('.','').lower()
+        return str(data).replace(' ', '').replace('doc', '').replace('.', '').lower()
+
 
 # data1 = str(data1).replace(' ', '').replace('doc', '').replace('.','').lower()
 # data2 = str(data1).replace(' ', '').replace('doc', '').replace('.','').lower()
@@ -86,6 +87,7 @@ class RadioButtonPage(BasePage):
 class WebTablePage(BasePage):
     locators = WebTablePageLocators()
 
+    # add user quantity
     def add_new_person(self):
         count = 1
         while count != 0:
@@ -105,7 +107,7 @@ class WebTablePage(BasePage):
             self.element_is_visible(self.locators.DEPARTMENT).send_keys(department)
             self.element_is_visible(self.locators.SUBMIT).click()
             count -= 1
-            return [firstname, lastname, str(age), email,  str(salary), department]
+            return [firstname, lastname, str(age), email, str(salary), department]
 
     def check_new_added_person(self):
         people_list = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
