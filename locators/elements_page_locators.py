@@ -49,3 +49,14 @@ class WebTablePageLocators:
     SEARCH_INPUT = (By.CSS_SELECTOR, "input[id='searchBox']")
     DELETE_BUTTON = (By.CSS_SELECTOR, "span[title='Delete']")
     ROW_PARENT = ".//ancestor::div[@class='rt-tr-group']"
+
+    #update
+    UPDATE_BUTTON = (By.CSS_SELECTOR, "span[title='Edit']")
+    AGE_INPUT = (By.CSS_SELECTOR, "input[id='age']")
+    SUBMIT_AGE = (By.CSS_SELECTOR, "button[id='submit']")
+
+    #delete
+    NO_DATA = (By.CSS_SELECTOR, "div[class='rt-noData']")
+
+    #rows_count
+    SELECT_ROWS_COUNT = (By.CSS_SELECTOR, "select[aria-label='rows per page']")
