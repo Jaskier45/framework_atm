@@ -60,3 +60,13 @@ class WebTablePageLocators:
 
     #rows_count
     SELECT_ROWS_COUNT = (By.CSS_SELECTOR, "select[aria-label='rows per page']")
+
+
+class ButtonClickPage:
+    DOUBLE_BUTTON = (By.CSS_SELECTOR, "button[id='doubleClickBtn']")
+    RIGHT_CLICK = (By.CSS_SELECTOR, "button[id='rightClickBtn']")
+    CLICK_ME = (By.XPATH, "//button[text()='Click Me']")
+
+    RESULT_DOUBLE_BUTTON = (By.CSS_SELECTOR, "p[id='doubleClickMessage']")
+    RESULT_RIGHT_CLICK = (By.CSS_SELECTOR, "p[id='rightClickMessage']")
+    RESULT_CLICK_ME = (By.CSS_SELECTOR, "p[id='dynamicClickMessage']")
