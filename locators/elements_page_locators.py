@@ -70,3 +70,8 @@ class ButtonClickPage:
     RESULT_DOUBLE_BUTTON = (By.CSS_SELECTOR, "p[id='doubleClickMessage']")
     RESULT_RIGHT_CLICK = (By.CSS_SELECTOR, "p[id='rightClickMessage']")
     RESULT_CLICK_ME = (By.CSS_SELECTOR, "p[id='dynamicClickMessage']")
+
+
+class LinkClickPage:
+    SIMPLE_LINK = (By.CSS_SELECTOR, 'a[id="simpleLink"]')
+    BAD_REQUEST = (By.CSS_SELECTOR, 'a[id="bad-request"]')
