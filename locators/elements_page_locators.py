@@ -81,3 +81,9 @@ class DownloadPages:
     DOWNLOAD_BUTTON = (By.CSS_SELECTOR, "a[id='downloadButton']")
     UPLOAD_FILE_BUTTON = (By.CSS_SELECTOR, "input[id='uploadFile']")
     UPLOAD_FILE_PATH = (By.CSS_SELECTOR, "p[id='uploadedFilePath']")
+
+
+class DynamicButtons:
+    ENABLE_AFTER = (By.CSS_SELECTOR, "button[id='enableAfter']")
+    COLOR_CHANGE = (By.CSS_SELECTOR, "button[id='colorChange']")
+    VISIBLE_AFTER = (By.CSS_SELECTOR, "button[id='visibleAfter']")
