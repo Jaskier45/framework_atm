@@ -12,6 +12,7 @@ class BasePage:
         self.driver.get(self.url)
 
     def element_is_visible(self, locator, timeout=6):
+        self.go_to_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     def elements_are_visible(self, locator, timeout=5):
@@ -43,3 +44,8 @@ class BasePage:
         action.perform()
 
     # def switch_to_new_tab(self):
+
+    def remove_ter(self):
+        # self.driver.execute_script("document.getElementsById('ad_unit').remove();")
+        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
+        # self.driver.execute_script("document.getElementsById('close-fixedban').remove();")
