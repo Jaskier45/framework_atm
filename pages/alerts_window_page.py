@@ -1,4 +1,7 @@
-from locators.alerts_window_locators import BrowserWindowPageLocator
+import random
+import time
+
+from locators.alerts_window_locators import BrowserWindowPageLocator, AlertsPageLocators
 from pages.base_page import BasePage
 
 
@@ -16,3 +19,38 @@ class BrowserWindowPage(BasePage):
         self.driver.switch_to.window(self.driver.window_handles[1])
         text_title = self.element_is_present(self.locators.NEW_TAB_TEXT).text
         return text_title
+
+
+class AlertsPage(BasePage):
+    locators = AlertsPageLocators()
+
+    def check_see_alert(self):
+        self.element_is_visible(self.locators.SEE_ALERT_BUTTON).click()
+        alert_window = self.driver.switch_to.alert
+        return alert_window.text
+
+    def check_delay_message_alert(self):
+        self.element_is_visible(self.locators.SEE_TIME_ALERT_BUTTON).click()
+        time.sleep(5)
+        alert_window = self.driver.switch_to.alert
+        return alert_window.text
+
+    def check_confirm_alert(self):
+        result = random.randint(0, 1)
+        self.element_is_visible(self.locators.CONFIRM_ALERT_BUTTON).click()
+        alert_window = self.driver.switch_to.alert
+        if result == 0:
+            alert_window.accept()
+        else:
+            alert_window.dismiss()
+        text_result = self.element_is_present(self.locators.ACCEPT_MESSAGE).text
+        return text_result
+
+    def check_prompt_alert(self):
+        text = f'autotest{random.randint(0,999)}'
+        self.element_is_visible(self.locators.SEE_PROMPT_ALERT_BUTTON).click()
+        alert_window = self.driver.switch_to.alert
+        alert_window.send_keys(text)
+        alert_window.accept()
+        result_text = self.element_is_present(self.locators.PROMPT_MESSAGE).text
+        return text, result_text
