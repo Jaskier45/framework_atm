@@ -14,3 +14,9 @@ class AlertsPageLocators:
     ACCEPT_MESSAGE = (By.CSS_SELECTOR, "span[id='confirmResult']")
     SEE_PROMPT_ALERT_BUTTON = (By.CSS_SELECTOR, "button[id='promtButton']")
     PROMPT_MESSAGE = (By.CSS_SELECTOR, "span[id='promptResult']")
+
+
+class LocatorsFramePage:
+    First_Big_iframe = (By.CSS_SELECTOR, "iframe[id='frame1']")
+    Second_small_iframe = (By.CSS_SELECTOR, "iframe[id='frame2']")
+    Text_frame = (By.CSS_SELECTOR, "h1[id='sampleHeading']")
