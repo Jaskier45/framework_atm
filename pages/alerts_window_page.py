@@ -1,7 +1,8 @@
 import random
 import time
 
-from locators.alerts_window_locators import BrowserWindowPageLocator, AlertsPageLocators, LocatorsFramePage
+from locators.alerts_window_locators import BrowserWindowPageLocator, AlertsPageLocators, LocatorsFramePage, \
+    NestedFrameLocators
 from pages.base_page import BasePage
 
 
@@ -76,3 +77,16 @@ class FramePage(BasePage):
             text = self.element_is_present(self.locators.Text_frame).text
             self.driver.switch_to.default_content()
             return [text, width, height]
+
+
+class NestedFramePage(BasePage):
+    locators = NestedFrameLocators()
+
+    def parents_child(self):
+        parent_frame = self.element_is_present(self.locators.PARENT_FRAME)
+        self.driver.switch_to.frame(parent_frame)
+        parent_text = self.element_is_present(self.locators.PARENT_FRAME_TEXT).text
+        child_frame = self.element_is_present(self.locators.CHILD_FRAME)
+        self.driver.switch_to.frame(child_frame)
+        child_text = self.element_is_present(self.locators.CHILD_FRAME_TEXT).text
+        return parent_text, child_text
