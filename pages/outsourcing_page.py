@@ -19,6 +19,7 @@ class OutsourcingPage(BasePage):
     def check_footer_info(self):
         footer_phone = self.element_is_visible(self.locators.footer_phone)
         footer_address = self.element_is_visible(self.locators.footer_address)
+        time.sleep(3)
         footer_mail = self.element_is_visible(self.locators.footer_mail)
         return footer_phone.text, footer_address.text, footer_mail.text
 

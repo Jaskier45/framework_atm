@@ -19,6 +19,7 @@ class TestOutsourcingForm:
             outsourcing_page = OutsourcingPage(driver, 'https://outsourcing.ankhora.co.uk/')
             outsourcing_page.open()
             footer_phone, footer_address, footer_mail = outsourcing_page.check_footer_info()
+            print(footer_phone, footer_address, footer_mail, sep= ' || ')
             assert footer_phone == '+4 479 356 614 95'
             assert footer_address == '5 High St, Maidenhead SL6 1JN, UK'
             assert footer_mail == 'business@outsourcing.ankhora.co.uk'
@@ -28,6 +29,7 @@ class TestOutsourcingForm:
             outsourcing_page.open()
             expected_result = ['Розробка стратегій розвитку компанії', 'Корпоративна діагностика', 'Оптимізація бізнес-процесів', 'Розробка бізнес плану та оцінка компанії', 'Супровід при виході на ринок', 'Розробка моделі управлінської звітності']
             actual_result = outsourcing_page.check_amount_article()
+            print(actual_result)
             assert actual_result == expected_result
 
         def test_amount_of_articles_sells(self, driver):
@@ -35,4 +37,5 @@ class TestOutsourcingForm:
             outsourcing_page.open()
             expected_result = ['Технології та програмне забезпечення', 'E-commerce', 'Продажі в соціальних мережах', 'Франчайзинг', 'Телемаркетинг']
             actual_result = outsourcing_page.check_amount_article_sells()
+            print(actual_result)
             assert actual_result == expected_result

@@ -1,7 +1,7 @@
 import time
 
 from pages.widgets_page import AccordianPage, AutoCompletePage, DataPickerPage, SliderPage, ProgressBarPage, TabsPage, \
-    TipsPage
+    TipsPage, MenuPage
 
 
 class TestWidgets:
@@ -97,3 +97,13 @@ class TestWidgets:
             assert contrary_text == 'You hovered over the text field'
             assert section_text == 'You hovered over the Contrary'
             # print('\n', button_text,'\n', field_text,'\n', contrary_text,'\n', section_text)
+
+    class TestMenuPage:
+
+        def test_menu_items(self, driver):
+            menu_page = MenuPage(driver, 'https://demoqa.com/menu')
+            menu_page.open()
+            exp_res = ['Main Item 1', 'Main Item 2', 'Sub Item', 'Sub Item', 'SUB SUB LIST »', 'Sub Sub Item 1', 'Sub Sub Item 2', 'Main Item 3']
+            data = menu_page.check_menu()
+            assert data == exp_res
+
