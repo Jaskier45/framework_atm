@@ -11,7 +11,7 @@ class BasePage:
     def open(self):
         self.driver.get(self.url)
 
-    def element_is_visible(self, locator, timeout=6):
+    def element_is_visible(self, locator, timeout=7):
         self.go_to_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
@@ -44,6 +44,21 @@ class BasePage:
         action.perform()
 
     # def switch_to_new_tab(self):
+
+    def action_drag_and_drop_by_offset(self, element, x_coords, y_coords):
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(element, x_coords, y_coords)
+        action.perform()
+
+    def action_drag_and_drop_to_element(self, what, where):
+        action = ActionChains(self.driver)
+        action.drag_and_drop(what, where)
+        action.perform()
+
+    def action_move_to_element(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
 
     def remove_ter(self):
         # self.driver.execute_script("document.getElementsById('ad_unit').remove();")
