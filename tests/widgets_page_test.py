@@ -106,4 +106,3 @@ class TestWidgets:
             exp_res = ['Main Item 1', 'Main Item 2', 'Sub Item', 'Sub Item', 'SUB SUB LIST »', 'Sub Sub Item 1', 'Sub Sub Item 2', 'Main Item 3']
             data = menu_page.check_menu()
             assert data == exp_res
-

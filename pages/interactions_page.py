@@ -6,7 +6,7 @@ from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color, generated_date
-from locators.interactions_locators import SortTableLocators
+from locators.interactions_locators import SortTableLocators, SelectableLocators
 from pages.base_page import BasePage
 
 
@@ -39,3 +39,22 @@ class SortTablePage(BasePage):
         print(grid_order_after)
         return grid_order_before, grid_order_after
 
+
+class SelectablePage(BasePage):
+    locators = SelectableLocators()
+
+    def click_selecteble_item(self, element):
+        item_list = self.elements_are_visible(element)
+        random.sample(item_list, k = 1)[0].click()
+
+    def select_list_item(self):
+        self.element_is_visible(self.locators.TAB_LIST).click()
+        self.click_selecteble_item(self.locators.LIST_ITEM)
+        active_elements = self.element_is_visible(self.locators.LIST_ACTIVE_ITEM)
+        return active_elements.text
+
+    def select_grid_item(self):
+        self.element_is_visible(self.locators.TAB_GRID).click()
+        self.click_selecteble_item(self.locators.GRID_ITEM)
+        active_elements = self.element_is_visible(self.locators.GRID_ACTIVE_ITEM)
+        return active_elements.text
