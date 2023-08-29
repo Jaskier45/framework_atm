@@ -1,4 +1,4 @@
-from pages.interactions_page import SortTablePage, SelectablePage, ResizablePage
+from pages.interactions_page import SortTablePage, SelectablePage, ResizablePage, Simple_drag
 
 
 class TestInteractions:
@@ -31,3 +31,33 @@ class TestInteractions:
             assert ('500px', '300px') == max_box
             assert ('150px', '150px') == min_box
             assert min_resize != max_resize
+
+    class TestDropTablePage:
+        def test_simple(self, driver):
+            simple_page = Simple_drag(driver, 'https://demoqa.com/droppable')
+            simple_page.open()
+            simple_text = simple_page.drag_simple_form()
+            assert simple_text == 'Dropped!', 'The element has not been dropped!'
+
+        def test_accept(self, driver):
+            accept_page = Simple_drag(driver, 'https://demoqa.com/droppable')
+            accept_page.open()
+            not_accept, accept = accept_page.drag_accept_form()
+            assert not_accept == 'Drop here', 'The dropped element has been accepted!'
+            assert accept == 'Dropped!', 'The dropped element has not been accepted!'
+
+
+        def test_prevent(self, driver):
+            prevent_page = Simple_drag(driver, 'https://demoqa.com/droppable')
+            prevent_page.open()
+            first_text, second_text, third_text = prevent_page.drag_prevent_form()
+            assert first_text == 'Dropped!Dropped!'
+            assert second_text == 'Dropped!'
+            assert third_text == 'Dropped!'
+
+        def test_revert(self, driver):
+            revent_page = Simple_drag(driver, 'https://demoqa.com/droppable')
+            revent_page.open()
+            after_move, after_revent, after_not_move, after_not_revent = revent_page.drop_will_revert()
+            assert after_move != after_revent
+            assert after_not_revent == after_not_move
