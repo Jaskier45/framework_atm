@@ -1,4 +1,4 @@
-from pages.interactions_page import SortTablePage, SelectablePage, ResizablePage, Simple_drag
+from pages.interactions_page import SortTablePage, SelectablePage, ResizablePage, Simple_drag, DraggablePage
 
 
 class TestInteractions:
@@ -46,7 +46,6 @@ class TestInteractions:
             assert not_accept == 'Drop here', 'The dropped element has been accepted!'
             assert accept == 'Dropped!', 'The dropped element has not been accepted!'
 
-
         def test_prevent(self, driver):
             prevent_page = Simple_drag(driver, 'https://demoqa.com/droppable')
             prevent_page.open()
@@ -61,3 +60,20 @@ class TestInteractions:
             after_move, after_revent, after_not_move, after_not_revent = revent_page.drop_will_revert()
             assert after_move != after_revent
             assert after_not_revent == after_not_move
+
+    class TestDraggablePage:
+        def test_draggable(self, driver):
+            dragg_page = DraggablePage(driver, 'https://demoqa.com/dragabble')
+            dragg_page.open()
+            before, after = dragg_page.simple_dragg_form()
+            assert before != after, "Position of the box has not been change"
+
+        def test_axis(self, driver):
+            dragg_page = DraggablePage(driver, 'https://demoqa.com/dragabble')
+            dragg_page.open()
+            x_before, x_after = dragg_page.axis_drag_x_form()
+            y_before, y_after = dragg_page.axis_drag_y_form()
+            assert x_before == [['0'], ['0']]
+            assert x_after != [['0'], ['0']]
+            assert y_before != [['0'], ['0']]
+            assert y_after == [['0'], ['0']]

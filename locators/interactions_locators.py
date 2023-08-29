@@ -53,3 +53,12 @@ class Simple_dragLocators:
     Not_revert = (By.CSS_SELECTOR, '#notRevertable')
     Revert_area = (By.CSS_SELECTOR, '#revertableDropContainer #droppable')
 
+
+class DraggablePageLocators:
+    Simple_tab = (By.CSS_SELECTOR, '#draggableExample-tab-simple')
+    Simple_drag = (By.CSS_SELECTOR, '#dragBox')
+
+    #Axis
+    Axis_Tab = (By.CSS_SELECTOR, '#draggableExample-tab-axisRestriction')
+    Only_X = (By.CSS_SELECTOR, '#restrictedX')
+    Only_Y = (By.CSS_SELECTOR, '#restrictedY')

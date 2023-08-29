@@ -1,4 +1,5 @@
 import random
+import re
 import time
 
 from selenium.common import TimeoutException
@@ -7,7 +8,7 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color, generated_date
 from locators.interactions_locators import SortTableLocators, SelectableLocators, ResizablePageLocators, \
-    Simple_dragLocators
+    Simple_dragLocators, DraggablePageLocators
 from pages.base_page import BasePage
 
 
@@ -145,3 +146,46 @@ class Simple_drag(BasePage):
         time.sleep(1)
         not_position_after_revert = not_revert.get_attribute('style')
         return position_after_move, position_after_revert, not_position_after_move,  not_position_after_revert
+
+
+class DraggablePage(BasePage):
+    locators = DraggablePageLocators()
+
+    def get_before_and_after_position(self, drag_element):
+        self.action_drag_and_drop_by_offset(drag_element, random.randint(0, 50), random.randint(0, 50))
+        before_position = drag_element.get_attribute('style')
+        self.action_drag_and_drop_by_offset(drag_element, random.randint(0, 50), random.randint(0, 50))
+        after_position = drag_element.get_attribute('style')
+        return before_position, after_position
+
+    def simple_dragg_form(self):
+        self.element_is_visible(self.locators.Simple_tab).click()
+        drag_item = self.element_is_visible(self.locators.Simple_drag)
+        before, after = self.get_before_and_after_position(drag_item)
+        return before, after
+
+    def get_top_position(self, positions):
+        return re.findall(r'\d[0-9]|\d', positions.split(';')[2])
+
+    def get_left_position(self, positions):
+        return re.findall(r'\d[0-9]|\d', positions.split(';')[1])
+
+    def axis_drag_x_form(self):
+        self.element_is_visible(self.locators.Axis_Tab).click()
+        only_x = self.element_is_visible(self.locators.Only_X)
+        position_x = self.get_before_and_after_position(only_x)
+        top_before_x = self.get_top_position(position_x[0])
+        top_after_x = self.get_top_position(position_x[1])
+        left_before_x = self.get_left_position(position_x[0])
+        left_after_x = self.get_left_position(position_x[1])
+        return [top_before_x, top_after_x], [left_before_x, left_after_x]
+
+    def axis_drag_y_form(self):
+        self.element_is_visible(self.locators.Axis_Tab).click()
+        only_y = self.element_is_visible(self.locators.Only_Y)
+        position_y = self.get_before_and_after_position(only_y)
+        top_before_y = self.get_top_position(position_y[0])
+        top_after_y = self.get_top_position(position_y[1])
+        left_before_y = self.get_left_position(position_y[0])
+        left_after_y = self.get_left_position(position_y[1])
+        return [top_before_y, top_after_y], [left_before_y, left_after_y]
